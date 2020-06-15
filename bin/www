@@ -4,10 +4,10 @@
  * Module dependencies.
  */
 
-const app = require('../app');
-const cors = require('cors');
+ const app = require('../app');
 const debug = require('debug')('flora-api:server');
 const http = require('http');
+require('dotenv').config();
 
 /**
  * Get port from environment and store in Express.
