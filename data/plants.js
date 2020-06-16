@@ -3,8 +3,8 @@ const ObjectID = require('mongodb').ObjectID;
 
 const url = process.env.DB_URL;
 
-dbName = 'flora';
-colName = 'plants';
+const dbName = 'flora';
+const colName = 'plants';
 
 const settings = { useUnifiedTopology: true };
 
