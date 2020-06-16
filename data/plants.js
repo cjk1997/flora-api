@@ -16,7 +16,6 @@ const getPlants = () => {
             } else {
                 console.log("Connected to server to retrieve plants.");
                 const db = client.db(dbName);
-                console.log(db);
                 const collection = db.collection(colName);
                 collection.find({}).toArray(function(err, docs) {
                     if (err) {
