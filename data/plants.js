@@ -90,8 +90,6 @@ const updateFavorite = (id, favorite) => {
                 console.log("Connected to server to update plant details.");
                 const db = client.db(dbName);
                 const collection = db.collection(colName);
-                console.log("favorite in updateFavorite", favorite)
-                console.log("!Boolean(favorite) in updateFavorite", !Boolean(favorite))
                 collection.updateOne({ _id: ObjectID(id) },
                     { $set: { favorite: !Boolean(favorite) } },
                     function(err, result) {
