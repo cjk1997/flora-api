@@ -63,7 +63,7 @@ const updatePlant = (id, plant) => {
                 console.log("Connected to server to update plant.");
                 const db = client.db(dbName);
                 const collection = db.collection(colName);
-                collection.replaceOne({ id : ObjectID(id) },
+                collection.replaceOne({ _id : ObjectID(id) },
                     plant,
                     { upsert : true },
                     (err, result) => {
@@ -81,7 +81,7 @@ const updatePlant = (id, plant) => {
     return iou;
 };
 
-const updatePlantDetails = (id, details) => {
+const updateFavorite = (id, favorite) => {
     const iou = new Promise((resolve, reject) => {
         MongoClient.connect(url, settings, function(err, client) {
             if (err) {
@@ -90,13 +90,24 @@ const updatePlantDetails = (id, details) => {
                 console.log("Connected to server to update plant details.");
                 const db = client.db(dbName);
                 const collection = db.collection(colName);
+                console.log("favorite in updateFavorite", favorite)
+                console.log("!Boolean(favorite) in updateFavorite", !Boolean(favorite))
                 collection.updateOne({ _id: ObjectID(id) },
-                
-                )
-            }
-        })
-    })
-}
+                    { $set: { favorite: !Boolean(favorite) } },
+                    function(err, result) {
+                        if (err) {
+                            reject(err);
+                        } else {
+                            resolve(result);
+                            client.close();
+                        };
+                    }
+                );
+            };
+        });
+    });
+    return iou;
+};
 
 const deletePlant = (id) => {
     const iou = new Promise((resolve, reject) => {
@@ -125,6 +136,6 @@ module.exports = {
     getPlants,
     addPlant,
     updatePlant,
-    updatePlantDetails,
+    updateFavorite,
     deletePlant
 };
