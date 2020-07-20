@@ -4,7 +4,7 @@ const {
     getPlants,
     addPlant,
     updatePlant,
-    updatePlantDetails,
+    updateFavorite,
     deletePlant
 } = require('../../data/plants');
 
@@ -38,15 +38,15 @@ router.put('/:id', async function(req, res) {
     };
 });
 
-router.patch('/:id', async function(req, res) {
+router.patch('/:id/:favorite', async function(req, res) {
     try {
-        const data = await updatePlantDetails(req.params.id, req.body);
+        const data = await updateFavorite(req.params.id, req.params.favorite);
         res.send(data);
     } catch (err) {
         console.log(err);
         res.status(500).send("Internal server issues, check logs.")
-    }
-})
+    };
+});
 
 router.delete('/:id', async function(req, res) {
     try {
